@@ -95,6 +95,7 @@ export const deleteFolder: RequestHandler = async (req, res) => {
 export const getFolders: RequestHandler = async (req, res) => {
   try {
     const result = await Folder.find({ parentFolderId: null });
+    res.set("Access-Control-Allow-Origin", "*");
     return res.status(HttpStatusCode.Ok).json({
       success: true,
       message: "Folder Retrieve Successful",
