@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import mongoose, { ConnectOptions } from "mongoose";
 import morgan from "morgan";
+import requestIp from "request-ip";
 
 import { DB, PORT } from "./Config";
 import { errorHandler } from "./Middleware/errorHandler";
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(errorHandler);
 app.use(morgan("tiny"));
+app.use(requestIp.mw());
 app.use("/v1", Routes);
 
 app.get("/", (req, res) => {

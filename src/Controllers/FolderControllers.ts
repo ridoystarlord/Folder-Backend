@@ -95,12 +95,14 @@ export const deleteFolder: RequestHandler = async (req, res) => {
 export const getFolders: RequestHandler = async (req, res) => {
   try {
     const result = await Folder.find({ parentFolderId: null });
+    const ip = req.clientIp;
     res.set("Access-Control-Allow-Origin", "*");
     return res.status(HttpStatusCode.Ok).json({
       success: true,
       message: "Folder Retrieve Successful",
       error: null,
       result: result,
+      ip: ip,
     });
   } catch (error) {
     return res.status(HttpStatusCode.InternalServerError).json({
@@ -108,6 +110,7 @@ export const getFolders: RequestHandler = async (req, res) => {
       message: "Folder Retrieve Failed",
       error: error,
       result: [],
+      ip: "",
     });
   }
 };
